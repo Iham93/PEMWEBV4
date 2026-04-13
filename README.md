@@ -1,78 +1,65 @@
-Panduan Lengkap Instalasi & Integrasi Database: Sistem Antrian Klinik
-Deskripsi Singkat:
-Sistem ini adalah aplikasi berbasis web untuk manajemen antrian klinik, dilengkapi dengan fitur multi-role (Admin dan Pasien/User). Proyek ini dibangun menggunakan PHP Native, MySQL, dan Bootstrap 5.
+# 🏥 Sistem Antrian Klinik Berbasis Web
 
-🛠️ Persyaratan Sistem (Prerequisites)
-Sebelum menjalankan aplikasi ini, pastikan komputer Anda sudah terinstal:
+Sistem ini adalah aplikasi berbasis web untuk manajemen antrian poliklinik yang dirancang untuk memudahkan proses pendaftaran pasien dan pemantauan antrian oleh petugas. Proyek ini dibangun menggunakan pendekatan prosedural dengan antarmuka yang modern dan responsif.
 
-Web Server lokal seperti XAMPP, Laragon, atau WAMP.
+## ✨ Fitur Utama
+- **Sistem Multi-Role:** Akses dibedakan antara **Pasien (User)** dan **Petugas (Admin)**.
+- **Autentikasi Aman:** Dilengkapi dengan fitur registrasi dan login menggunakan enkripsi password (`password_hash`).
+- **Dashboard Pasien:** Pasien dapat mengambil nomor antrian secara *real-time* sesuai poliklinik yang dituju.
+- **Dashboard Admin:** Petugas dapat memonitor jumlah antrian, melihat status pasien, dan mengelola jadwal dokter.
+- **UI/UX Modern:** Tampilan *user-friendly* dengan animasi transisi menggunakan Bootstrap 5.
 
-Web Browser (Google Chrome, Mozilla Firefox, dll).
+## 🛠️ Teknologi yang Digunakan
+- **Frontend:** HTML5, CSS3, JavaScript, Bootstrap 5.3.2
+- **Backend:** PHP Native
+- **Database:** MySQL
+- **Environment:** XAMPP / Laragon
 
-🚀 Langkah-Langkah Instalasi
-Tahap 1: Menyiapkan File Project
+---
 
-Silakan unduh proyek ini dari GitHub dengan cara klik tombol hijau <> Code lalu pilih Download ZIP.
+## 🚀 Panduan Instalasi Lengkap
 
-Ekstrak file ZIP yang sudah diunduh.
+### Tahap 1: Persiapan File Proyek
+1. Unduh proyek ini dengan mengklik tombol hijau **`<> Code`** lalu pilih **`Download ZIP`**.
+2. Ekstrak file ZIP yang baru saja diunduh.
+3. Ubah nama folder hasil ekstrak menjadi **`klinik_ilham`** (agar lebih mudah diakses).
+4. Pindahkan folder tersebut ke dalam direktori *local server* Anda:
+   - Pengguna **XAMPP**: Pindahkan ke `C:\xampp\htdocs\`
+   - Pengguna **Laragon**: Pindahkan ke `C:\laragon\www\`
 
-Ubah nama folder hasil ekstrak menjadi lebih singkat (misalnya: klinik_ilham).
+### Tahap 2: Menjalankan Server
+1. Buka aplikasi **XAMPP Control Panel**.
+2. Klik tombol **Start** pada modul **Apache** dan **MySQL** hingga indikator berwarna hijau.
 
-Pindahkan folder tersebut ke dalam direktori server lokal Anda:
+---
 
-Pengguna XAMPP: Pindahkan ke folder C:\xampp\htdocs\
+## 🗄️ Tahap 3: Konfigurasi & Memasukkan Database (PENTING)
 
-Pengguna Laragon: Pindahkan ke folder C:\laragon\www\
+Agar aplikasi dapat berjalan dan menyimpan data, Anda wajib membuat database MySQL. Berikut adalah panduannya:
 
-Tahap 2: Konfigurasi Database MySQL
-Agar aplikasi dapat menyimpan data registrasi dan login, kita perlu menghubungkannya ke database.
+1. Buka web browser (Chrome/Edge) dan akses alamat: `http://localhost/phpmyadmin`
+2. Di panel sebelah kiri, klik tulisan **New** (Baru).
+3. Pada kolom *Database name* (Nama basis data), ketik persis: **`sistem_klinik`**
+4. Klik tombol **Create** (Buat).
 
-Buka aplikasi XAMPP Control Panel (atau Laragon).
+Setelah database terbuat, **Pilih salah satu dari 2 cara di bawah ini** untuk memasukkan struktur tabelnya:
 
-Klik tombol Start pada modul Apache dan MySQL.
+**CARA A: Menggunakan Fitur Import (Sangat Disarankan)**
+1. Pastikan Anda sudah mengklik/masuk ke dalam database `sistem_klinik` di phpMyAdmin.
+2. Klik tab **Import** di deretan menu bagian atas.
+3. Klik tombol **Choose File** (Pilih File).
+4. Cari dan pilih file bernama **`sistem_klinik.sql`** yang ada di dalam folder proyek `klinik_ilham` yang Anda unduh tadi.
+5. Gulir ke bagian paling bawah, lalu klik tombol **Import** (Kirim). Tunggu hingga muncul kotak hijau tanda sukses.
 
-Buka web browser dan akses alamat: http://localhost/phpmyadmin
-
-Buat database baru:
-
-Klik menu New (Baru) di panel sebelah kiri.
-
-Pada kolom nama database, ketikkan persis: sistem_klinik
-
-Klik tombol Create (Buat).
-
-Import struktur tabel:
-
-Pastikan Anda sedang berada di dalam database sistem_klinik.
-
-Klik tab Import di deretan menu atas.
-
-Klik tombol Choose File (Pilih File) lalu cari dan pilih file bernama sistem_klinik.sql yang berada di dalam folder project yang Anda unduh tadi.
-
-Gulir ke bawah dan klik tombol Import (Kirim) di pojok kanan bawah. Tunggu hingga muncul notifikasi sukses berwarna hijau.
-
-Tahap 3: Pengecekan Koneksi (Opsional / Jika Ada Eror)
-Secara default, file koneksi.php sudah disetting untuk MySQL standar (Port 3306).
-Jika MySQL di laptop Anda menggunakan port berbeda (misalnya 3307), Anda harus membuka file koneksi.php dan menyesuaikan baris kodenya menjadi:
-
-PHP
-$host = "127.0.0.1"; 
-$user = "root";
-$pass = "";
-$db   = "sistem_klinik";
-$port = 3307; // Sesuaikan dengan port MySQL Anda
-
-$conn = mysqli_connect($host, $user, $pass, $db, $port);
-Tahap 4: Menjalankan Aplikasi
-
-Buka tab baru di web browser Anda.
-
-Ketikkan alamat berikut di address bar:
-http://localhost/klinik_ilham/login.php
-(Catatan: Ganti tulisan klinik_ilham dengan nama folder yang Anda buat pada Tahap 1).
-
-Mulai Testing! * Silakan masuk ke halaman Registrasi terlebih dahulu.
-
-Coba buat akun baru dan pilih Role sebagai Pasien (User), lalu coba login.
-
-Logout, lalu buat akun baru lagi dan pilih Role sebagai Petugas (Admin), lalu coba login. Sistem akan otomatis memisahkan halaman dashboard sesuai peran masing-masing.
+**CARA B: Menggunakan Copy-Paste SQL (Alternatif)**
+1. Pastikan Anda sudah berada di dalam database `sistem_klinik`.
+2. Klik tab **SQL** di deretan menu bagian atas.
+3. *Copy* kode di bawah ini, dan *paste* ke dalam kotak putih yang tersedia:
+   ```sql
+   CREATE TABLE IF NOT EXISTS users (
+       id INT AUTO_INCREMENT PRIMARY KEY,
+       username VARCHAR(50) NOT NULL,
+       email VARCHAR(100) NOT NULL,
+       password VARCHAR(255) NOT NULL,
+       role ENUM('admin', 'user') DEFAULT 'user'
+   );
